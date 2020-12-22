@@ -7,7 +7,7 @@ image = PxlArt('test_image.jpg', 'output.png')
 image.resize(-4)
 
 # get 10 most common colors
-image.extract_color_palette(10)
+image.extract_color_palette(60)
 
 # convert each pixel color to the closest one from the palette
 image.assign_colors()
