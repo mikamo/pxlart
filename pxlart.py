@@ -90,18 +90,9 @@ class PxlArt:
         new_image_array = np.zeros((self.height - 1, self.width - 1, 3))
         for y in range(1, self.height - 1):
             for x in range(1, self.width - 1):
-                neighbors = [
-                    self.image_array[y - 1, x - 1],
-                    self.image_array[y - 1, x],
-                    self.image_array[y - 1, x + 1],
-                    self.image_array[y, x - 1],
-                    # self.image_array[y, x],
-                    self.image_array[y, x + 1],
-                    self.image_array[y + 1, x - 1],
-                    self.image_array[y + 1, x],
-                    self.image_array[y + 1, x + 1]
-                ]
+                neighbors = self.image_array[y-1:y+2, x-1:x+2, :].reshape(9, 3)
                 neighbors = [tuple(x.astype('int')) for x in neighbors]
+                neighbors.pop(4)  # pop center pixel of the block
                 majority_neighbor = majority_voting(neighbors)
                 new_image_array[y, x] = majority_neighbor
 
